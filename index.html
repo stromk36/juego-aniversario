@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anniversary Quest - Final Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+
+        <!-- ── INTERFAZ DEL JEFE ── -->
+        <div id="boss-ui" style="display: none;">
+            <div class="health-container" style="width: 45%;">
+                <span class="hp-text">DORIAN</span>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="health-bar-bg" style="flex-grow: 1;">
+                        <div id="dorian-hp" class="health-bar-fill dorian-fill"></div>
+                    </div>
+                    <img id="current-weapon-icon" src="assets/p_heart_lvl1.png"
+                         style="width: 35px; height: 35px; image-rendering: pixelated; border: 2px solid white; background: #222;">
+                </div>
+            </div>
+            <div class="health-container" style="text-align: right; width: 45%;">
+                <span class="hp-text">LA DISTANCIA</span>
+                <div class="health-bar-bg">
+                    <div id="boss-hp" class="health-bar-fill boss-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PANTALLA DE INICIO ── -->
+        <div id="screen-start" class="overlay">
+            <div class="pixel-box">
+                <span class="block-title block-main">ANNIVERSARY<br>QUEST</span>
+                <span class="px-sub-exempt">V4.0 — FASE FINAL</span>
+                <span id="loading-status">▶ CARGANDO RECURSOS...</span>
+                <div>
+                    <button id="start-btn" class="btn" style="display: none;">▶ START GAME</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PANTALLA DE HALAGOS ── -->
+        <div id="screen-halagos" class="overlay" style="display: none;">
+            <div class="pixel-box">
+                <h2 id="halago-text">Este es un regalo para mi...</h2>
+                <span id="halago-sub" class="px-body-muted blink">[ clic para continuar ]</span>
+            </div>
+        </div>
+
+        <!-- ── GAME OVER ── -->
+        <div id="screen-gameover" class="overlay" style="display: none;">
+            <div class="pixel-box">
+                <span class="block-title block-red">GAME<br>OVER</span>
+                <span class="px-body" style="color: #ff8fa3;">
+                    Calcula mejor tus<br>movimientos...
+                </span>
+                <div>
+                    <button class="btn" onclick="window.resetLevel(false)">↺ REINTENTAR</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── NIVEL COMPLETADO ── -->
+        <div id="screen-level1-complete" class="overlay" style="display: none;">
+            <div class="pixel-box">
+                <span class="block-title block-purple">★ NIVEL<br>COMPLETADO ★</span>
+                <span class="px-body">
+                    Has superado el nido,<br>pero aun falta un reto...
+                </span>
+                <div>
+                    <button class="btn" onclick="window.startBossLevel()">▶ ENFRENTAR LA DISTANCIA</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── VICTORIA FINAL / CARTA DE AMOR ── -->
+        <div id="love-letter" class="overlay" style="display: none;">
+            <div class="pixel-box">
+                <span class="block-title block-win">♥ LO LOGRAMOS ♥</span>
+                <span class="px-body">La distancia ha sido derrotada.</span>
+                <span class="px-body-muted">
+                    Esto es un regalo que hice con mucho esfuerzo para ti, espero lo hayas disfrutado mucho.
+                </span>
+                <div>
+                    <button class="btn" onclick="window.resetLevel(true)">↺ REPETIR TODO EL JUEGO</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── CANVAS DEL JUEGO ── -->
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+
+        <!-- ── BOTÓN DE DISPARO ── -->
+        <button id="btn-shoot" class="btn"
+            style="position: absolute; bottom: 15px; right: 20px; z-index: 20; display: none; padding: 10px 20px; font-size: 7px; box-shadow: 2px 2px 0 #000; margin-top: 0;"
+            onmousedown="keys['KeyZ']=true" onmouseup="keys['KeyZ']=false" onmouseleave="keys['KeyZ']=false"
+            ontouchstart="keys['KeyZ']=true" ontouchend="keys['KeyZ']=false">
+            ♥ DISPARAR (Z)
+        </button>
+
+    </div>
+
+    <!-- ── SCRIPTS DEL JUEGO ── -->
+    <script src="game_engine.js"></script>
+    <script src="level_bacteria.js"></script>
+    <script src="level_spider.js"></script>
+    <script src="level_boss.js"></script>
+
+
+
+</body>
+</html>
